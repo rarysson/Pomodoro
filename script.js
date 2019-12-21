@@ -213,7 +213,7 @@ function reset() {
 	on_work = on_break = paused = false;
 	work_qnt = minutes_work = default_work_time;
 	break_qnt = minutes_break = default_break_time;
-	pomodoro_qnt = default_pomodoro_qnt;
+	pomodoro_qnt = pomodoros_count = default_pomodoro_qnt;
 	seconds_work = seconds_work = 0;
 
 	work_time.innerText = work_qnt;
@@ -222,6 +222,7 @@ function reset() {
 	seconds_timer.innerText = "00";
 	text_timer.innerText = text_work;
 	pomodoro.innerText = pomodoro_qnt;
+	pomodoros_number.innerText = pomodoro_qnt;
 	textarea.style.color = "whitesmoke";
 	textarea.removeAttribute("disabled");
 }
