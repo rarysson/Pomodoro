@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>Pomodoro Timer</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" rel="stylesheet" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+		<link href="style.css" rel="stylesheet">
+	</head>
+	<body>
+		<h1>Pomodoro Timer</h1>
+
+		<label for="task">What task do you want to do?</label> <br>
+		<textarea id="task" placeholder="Type here what you want to do..."></textarea> <br>
+
+		<label for="quantity-pomodoro">How many pomodoros do you want to do?</label> <br>
+		<div class="time-controller">
+			<i class="fa fa-angle-down fa-2x" onclick="subtract_pomodoro()"></i>
+			<span id="quantity-pomodoro">4</span>
+			<i class="fa fa-angle-up fa-2x" onclick="add_pomodoro()"></i>
+		</div>
+
+		<!--Section for the controls of the timer-->
+		<section class="container">
+			<section class="time">
+				<p>Work</p>
+				<div class="time-controller">
+					<i class="fa fa-angle-down fa-2x" onclick="subtract_work()"></i>
+					<span id="work-time">25</span>
+					<i class="fa fa-angle-up fa-2x" onclick="add_work()"></i>
+				</div>
+			</section>
+			<section class="time">
+				<p>Break</p>
+				<div class="time-controller">
+					<i class="fa fa-angle-down fa-2x" onclick="subtract_break()"></i>
+					<span id="break-time">5</span>
+					<i class="fa fa-angle-up fa-2x" onclick="add_break()"></i>
+				</div>
+			</section>
+		</section>
+
+		<!--Section for the timer-->
+		<section class="container">
+			<span class="small-ltr">Remaining pomodoros: 
+				<span id="pomodoros">4</span> 
+			</span> <br>
+			<span id="text-timer">It's time to work!</span> <br>
+			<span id="minutes" class="timer-number">25</span>
+			<span class="timer-number">:</span>
+			<span id="seconds" class="timer-number">00</span> <br>
+			<div id="controls-timer">
+				<i class="fa fa-play fa-2x btn-player" onclick="play()"></i>
+				<i class="fa fa-pause fa-2x btn-player" onclick="pause()"></i>
+				<i class="fa fa-stop fa-2x btn-player" onclick="stop()"></i>
+				<i class="fa fa-refresh fa-2x btn-player" onclick="reset()"></i>
+			</div>
+		</section>
+	</body>
+
+	<script src="script.js"></script>
+</html>
