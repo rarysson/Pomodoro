@@ -39,16 +39,18 @@ function timer() {
 	} else {
 		if (on_work) {
 			seconds_work--;
-	
+
 			if (seconds_work < 0) {
 				seconds_work = 59;
 				minutes_work--;
 			}
-	
+
 			if (minutes_work >= 0) {
 				minutes_timer.innerText = correct_time(minutes_work);
 				seconds_timer.innerText = correct_time(seconds_work);
 			} else {
+				pomodoros_count--;
+
 				minutes_work = work_qnt;
 				seconds_work = 0;
 				on_work = false;
@@ -59,23 +61,31 @@ function timer() {
 				seconds_timer.innerText = correct_time(seconds_break);
 				textarea.style.color = "darkslateblue";
 
-				let sound = new Audio("assets/break.mp3");
-				sound.play();
+				if (pomodoros_count < 1) {
+					let sound = new Audio("assets/end.mp3");
+					sound.play();
+					stop();
+					text_timer.innerText = "Take a long break! Like 15~30 minutes";
+					textarea.style.color = "whitesmoke";
+					textarea.removeAttribute("disabled");
+				} else {
+					let sound = new Audio("assets/break.mp3");
+					sound.play();
+					pomodoros_number.innerText = pomodoros_count;
+				}
 			}
 		} else {
 			seconds_break--;
-	
+
 			if (seconds_break < 0) {
 				seconds_break = 59;
 				minutes_break--;
 			}
-	
+
 			if (minutes_break >= 0) {
 				minutes_timer.innerText = correct_time(minutes_break);
 				seconds_timer.innerText = correct_time(seconds_break);
 			} else {
-				pomodoros_count--;
-
 				minutes_break = break_qnt;
 				seconds_break = 0;
 				on_break = false;
@@ -85,19 +95,6 @@ function timer() {
 				minutes_timer.innerText = correct_time(minutes_work);
 				seconds_timer.innerText = correct_time(seconds_work);
 				textarea.style.color = "red";
-
-				if (pomodoros_count < 1) {
-					let sound = new Audio("assets/end.mp3");
-					sound.play();
-					stop();
-					text_timer.innerText = "Take a long break! Like 15~30 minutes";
-					textarea.style.color = "whitesmoke";
-					textarea.removeAttribute("disabled");
-				} else {
-					let sound = new Audio("assets/work.mp3");
-					sound.play();
-					pomodoros_number.innerText = pomodoros_count;
-				}
 			}
 		}
 	}
@@ -134,7 +131,7 @@ function add_work() {
 
 		work_time.innerText = work_qnt;
 		minutes_timer.innerText = correct_time(minutes_work);
-	}	
+	}
 }
 
 function subtract_work() {
@@ -145,7 +142,7 @@ function subtract_work() {
 
 		work_time.innerText = work_qnt;
 		minutes_timer.innerText = correct_time(minutes_work);
-	}	
+	}
 }
 
 function add_break() {
@@ -155,7 +152,7 @@ function add_break() {
 		minutes_break = break_qnt;
 
 		break_time.innerText = break_qnt;
-	}	
+	}
 }
 
 function subtract_break() {
@@ -165,7 +162,7 @@ function subtract_break() {
 		minutes_break = break_qnt;
 
 		break_time.innerText = break_qnt;
-	}	
+	}
 }
 
 function play() {
@@ -173,9 +170,9 @@ function play() {
 		on_work = on_play = true;
 		textarea.style.color = "red";
 		textarea.setAttribute("disabled", "");
-		
+
 		play_timer();
-	} else if (paused) {		
+	} else if (paused) {
 		on_play = true;
 		paused = false;
 
