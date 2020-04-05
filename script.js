@@ -26,6 +26,7 @@ let on_break = false;
 let on_play = false;
 let paused = false;
 let id_interval;
+let id_interval_controls;
 
 
 
@@ -100,6 +101,10 @@ function timer() {
 	}
 }
 
+function release_mouse() {
+	clearInterval(id_interval_controls);
+}
+
 function play_timer() {
 	id_interval = setInterval(timer, 1000);
 }
@@ -113,6 +118,10 @@ function add_pomodoro() {
 	}
 }
 
+function up_pomodoro() {
+	id_interval_controls = setInterval(add_pomodoro, 100);
+}
+
 function subtract_pomodoro() {
 	if (!on_work && !on_break) {
 		pomodoro_qnt--;
@@ -121,6 +130,10 @@ function subtract_pomodoro() {
 		pomodoro.innerText = pomodoro_qnt;
 		pomodoros_number.innerText = pomodoros_count = pomodoro_qnt;
 	}
+}
+
+function down_pomodoro() {
+	id_interval_controls = setInterval(subtract_pomodoro, 100);
 }
 
 function add_work() {
@@ -134,6 +147,10 @@ function add_work() {
 	}
 }
 
+function up_work() {
+	id_interval_controls = setInterval(add_work, 100);
+}
+
 function subtract_work() {
 	if (!on_work && !on_break) {
 		work_qnt--;
@@ -143,6 +160,10 @@ function subtract_work() {
 		work_time.innerText = work_qnt;
 		minutes_timer.innerText = correct_time(minutes_work);
 	}
+}
+
+function down_work() {
+	id_interval_controls = setInterval(subtract_work, 100);
 }
 
 function add_break() {
@@ -155,6 +176,10 @@ function add_break() {
 	}
 }
 
+function up_break() {
+	id_interval_controls = setInterval(add_break, 100);
+}
+
 function subtract_break() {
 	if (!on_work && !on_break) {
 		break_qnt--;
@@ -165,8 +190,16 @@ function subtract_break() {
 	}
 }
 
+function down_break() {
+	id_interval_controls = setInterval(subtract_break, 100);
+}
+
 function play() {
 	if (!on_work && !on_break) {
+		if (textarea.value === "") {
+			textarea.value = "I will do something";
+		}
+
 		on_work = on_play = true;
 		textarea.style.color = "red";
 		textarea.setAttribute("disabled", "");

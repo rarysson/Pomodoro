@@ -13,36 +13,40 @@
 		<label for="task">What task do you want to do?</label> <br>
 		<textarea id="task" placeholder="e.g.: write an essay"></textarea> <br>
 
-		<label for="quantity-pomodoro">How many pomodoros do you want to do?</label> <br>
+		<label for="quantity-pomodoro">How many sessions do you want to do?</label> <br>
 		<div class="time-controller">
-			<i class="fa fa-angle-down fa-2x" onclick="subtract_pomodoro()"></i>
+			<i class="fa fa-angle-down fa-2x" onclick="subtract_pomodoro()" onmousedown="down_pomodoro()" onmouseup="release_mouse()"></i>
 			<span id="quantity-pomodoro">4</span>
-			<i class="fa fa-angle-up fa-2x" onclick="add_pomodoro()"></i>
+			<i class="fa fa-angle-up fa-2x" onclick="add_pomodoro()" onmousedown="up_pomodoro()" onmouseup="release_mouse()"></i>
 		</div>
 
 		<!--Section for the controls of the timer-->
-		<section class="container">
-			<section class="time">
-				<p>Work</p>
-				<div class="time-controller">
-					<i class="fa fa-angle-down fa-2x" onclick="subtract_work()"></i>
-					<span id="work-time">25</span>
-					<i class="fa fa-angle-up fa-2x" onclick="add_work()"></i>
-				</div>
+		<fieldset>
+			<legend>Timers</legend>
+
+			<section class="container">
+				<section class="time">
+					<p>Work</p>
+					<div class="time-controller">
+						<i class="fa fa-angle-down fa-2x" onclick="subtract_work()" onmousedown="down_work()" onmouseup="release_mouse()"></i>
+						<span id="work-time">25</span>
+						<i class="fa fa-angle-up fa-2x" onclick="add_work()" onmousedown="up_work()" onmouseup="release_mouse()"></i>
+					</div>
+				</section>
+				<section class="time">
+					<p>Break</p>
+					<div class="time-controller">
+						<i class="fa fa-angle-down fa-2x" onclick="subtract_break()" onmousedown="down_break()" onmouseup="release_mouse()"></i>
+						<span id="break-time">5</span>
+						<i class="fa fa-angle-up fa-2x" onclick="add_break()" onmousedown="up_break()" onmouseup="release_mouse()"></i>
+					</div>
+				</section>
 			</section>
-			<section class="time">
-				<p>Break</p>
-				<div class="time-controller">
-					<i class="fa fa-angle-down fa-2x" onclick="subtract_break()"></i>
-					<span id="break-time">5</span>
-					<i class="fa fa-angle-up fa-2x" onclick="add_break()"></i>
-				</div>
-			</section>
-		</section>
+		</fieldset>
 
 		<!--Section for the timer-->
 		<section class="container">
-			<span class="small-ltr">Remaining pomodoros:
+			<span class="small-ltr">Remaining sessions:
 				<span id="pomodoros">4</span>
 			</span> <br>
 			<span id="text-timer">It's time to work!</span> <br>
